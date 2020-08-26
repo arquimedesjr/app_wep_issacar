@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block titlePage %}
+Cadastro
+{%endblock%}
+{% block css %}
+
+{%endblock%}
+
+{% block content %}
+
+<!--body-->
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-sm-6">
+
+
+            <div class="card bg-light mb-3">
+                <div class="card-body">
+                    <h5>Deseja mesmo excluir esse Jovem?</h5>
+                    <form method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary">Excluir</button>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<!--scripts-->
+{% endblock %}
+
+{% endblock content %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block titlePage %}
+Dashboard
+{%endblock%}
+{% block css %}
+<!-- href css -->
+
+{%endblock%}
+
+{% block content %}
+<div class="container">
+    <h5 class="text-center">Relatório</h5>
+    <div class="table-responsive-sm">
+        <table class="table text-center table-striped table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Tribo</th>
+                <th scope="col">Grupo</th>
+                <th scope="col">Reunião</th>
+                <th scope="col">Data</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for rel in lista %}
+            <tr>
+                <td>
+                    {{rel.qnt_Jovem}}
+                </td>
+                <td>{{rel.tribo}}</td>
+                <td>
+                    {{rel.grupo}}
+                </td>
+                <td>
+                    {{rel.reuniao}}
+                </td>
+                <td>
+                    {{rel.data}}
+                </td>
+            </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}
+
