@@ -30,10 +30,12 @@ def enviar_relatorio(request):
 
     if result[0] > 0:
         x = datetime.datetime.now()
+
     cursor.execute(
         'INSERT INTO app_relatorio '
-        '(qnt_Jovem, grupo_id, tribo_id, data, reuniao_id) VALUES (%s, %s, %s, %s, %s)',
-        [result[0], 1, 1, x.strftime("%Y") + '-' + x.strftime("%m") + '-' + x.strftime("%d"), id_reuniao])
+        '(qnt_Jovem, grupo_id, tribo_id, data, reuniao_id) '
+        'VALUES (%s, %s, %s, %s, %s)',
+        (result[0], 1, 1, x.strftime("%Y") + '-' + x.strftime("%m") + '-' + x.strftime("%d"), id_reuniao))
 
 
 @login_required
