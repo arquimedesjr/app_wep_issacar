@@ -1,12 +1,7 @@
-from contextlib import closing
-from idlelib import debugger
-
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
-from django.db import connection
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 
