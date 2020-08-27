@@ -13,14 +13,12 @@ def index(request, template_name="index.html"):
     consul_relatorio = cursor.fetchone()
     print(consul_relatorio)
 
-    if consul_relatorio is not '' or consul_relatorio is not None:
+    if consul_relatorio is not None:
         cursor.execute('SELECT qnt_Jovem from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 1')
         result_algo = cursor.fetchone()
-        print(result_algo)
 
         cursor.execute('SELECT qnt_Jovem from app_relatorio WHERE reuniao_id = 2 ORDER by id DESC LIMIT 1')
         result_encontro = cursor.fetchone()
-        print(result_encontro)
 
         cursor.execute('SELECT qnt_Jovem from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 4')
         result_mensal_algo = [i for i in itertools.chain(*cursor.fetchall())]
@@ -40,14 +38,24 @@ def index(request, template_name="index.html"):
         result_mensal_algo_data = [i.strftime("%d/%m/%y") for i in itertools.chain(*cursor.fetchall())]
         result_mensal_algo_data.reverse()
 
+    else:
+        result_mensal_algo = []
+        result_mensal_encontro = []
+        result_mensal_encontro_data = []
+        result_mensal_algo_data = []
+
     if type(result_encontro) is not tuple or result_encontro is None:
         result_encontro = (0,)
 
     if type(result_algo) is not tuple or result_algo is None:
         result_algo = (0,)
 
+
     print(result_algo)
     print(result_encontro)
+    print(result_mensal_algo)
+    print(result_mensal_encontro_data)
+    print(result_mensal_algo_data)
 
     result = result_encontro + result_algo
     r = {'result': result[0], 'result_algo': result[1], 'result_mensal_algo': result_mensal_algo,
