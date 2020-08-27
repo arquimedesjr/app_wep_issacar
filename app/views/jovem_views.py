@@ -19,9 +19,11 @@ def lista_jovens_presenca(request, tamplate_name="list_jovem.html"):
 
 def enviar_relatorio(request):
     cursor = connection.cursor()
+
     cursor.execute("SELECT COUNT(presenca) from app_jovens WHERE presenca = 'SIM'")
     result = cursor.fetchone()
     print(result)
+
     reuniao = request.POST.get("reuniao", None)
     id_reuniao = 2
 
@@ -33,7 +35,7 @@ def enviar_relatorio(request):
 
     cursor.execute(
         "INSERT INTO app_relatorio "
-        "(grupo_id, tribo_id, data, reuniao_id, qnt_Jovem) "
+        "(grupo_id, tribo_id, data, reuniao_id, qnt) "
         "VALUES (%s, %s, %s, %s, %s)",
         (1, 1, x.strftime("%Y") + '-' + x.strftime("%m") + '-' + x.strftime("%d"), id_reuniao, result))
 

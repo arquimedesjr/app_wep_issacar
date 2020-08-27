@@ -64,35 +64,6 @@ class Jovens(models.Model):
     def __str__(self):
         return self.nome
 
-
-class RelatorioAlgoAMais(models.Model):
-    qnt_Jovem = models.IntegerField()
-    tribo = models.ForeignKey(Tribo, on_delete=models.CASCADE)
-    grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE)
-    reuniao = models.CharField(max_length=20, verbose_name='Reunião', default='Encontro Jovem')
-    data = models.DateField(auto_now_add=True)
-
-    class Meta:
-        verbose_name_plural = "Relatorio Algo A +"
-
-    def __str__(self):
-        return self.tribo + " - " + self.grupo
-
-
-class RelatorioEncontroJovem(models.Model):
-    qnt_Jovem = models.IntegerField()
-    tribo = models.ForeignKey(Tribo, on_delete=models.CASCADE)
-    grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE)
-    reuniao = models.CharField(max_length=20, verbose_name='Reunião', default='Algo A +')
-    data = models.DateField(auto_now_add=True)
-
-    class Meta:
-        verbose_name_plural = "Relatorio Encontro Jovem"
-
-    def __str__(self):
-        return self.tribo + " - " + self.grupo
-
-
 class Reuniao(models.Model):
     reuniao = models.CharField(max_length=20)
 
@@ -104,7 +75,7 @@ class Reuniao(models.Model):
 
 
 class Relatorio(models.Model):
-    qnt_Jovem = models.IntegerField()
+    qnt = models.IntegerField()
     tribo = models.ForeignKey(Tribo, on_delete=models.CASCADE)
     grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE)
     reuniao = models.ForeignKey(Reuniao, on_delete=models.CASCADE)
