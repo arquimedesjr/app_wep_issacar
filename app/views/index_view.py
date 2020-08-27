@@ -14,17 +14,17 @@ def index(request, template_name="index.html"):
     print(consul_relatorio)
 
     if consul_relatorio is not None:
-        cursor.execute('SELECT qnt_Jovem from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 1')
+        cursor.execute('SELECT qnt from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 1')
         result_algo = cursor.fetchone()
 
-        cursor.execute('SELECT qnt_Jovem from app_relatorio WHERE reuniao_id = 2 ORDER by id DESC LIMIT 1')
+        cursor.execute('SELECT qnt from app_relatorio WHERE reuniao_id = 2 ORDER by id DESC LIMIT 1')
         result_encontro = cursor.fetchone()
 
-        cursor.execute('SELECT qnt_Jovem from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 4')
+        cursor.execute('SELECT qnt from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 4')
         result_mensal_algo = [i for i in itertools.chain(*cursor.fetchall())]
         result_mensal_algo.reverse()
 
-        cursor.execute('SELECT qnt_Jovem from app_relatorio WHERE reuniao_id = 2 ORDER by id DESC LIMIT 4')
+        cursor.execute('SELECT qnt from app_relatorio WHERE reuniao_id = 2 ORDER by id DESC LIMIT 4')
         result_mensal_encontro = [i for i in itertools.chain(*cursor.fetchall())]
         result_mensal_encontro.reverse()
         cursor = connection.cursor()
