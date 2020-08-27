@@ -55,8 +55,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'gettingstarted.urls'
 
-
-# LOGOUT_REDIRECT_URL = 'logar'
+LOGIN_URL = '/'
+LOGOUT_REDIRECT_URL = '/logar'
 
 TEMPLATES = [
     {
@@ -139,7 +139,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-LOGIN_REDIRECT_URL = 'logar'
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/app/static/'
