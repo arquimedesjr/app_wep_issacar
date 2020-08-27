@@ -16,8 +16,7 @@ from .models import *
 
 
 admin.site.register(Jovens)
-admin.site.register(RelatorioAlgoAMais)
-admin.site.register(RelatorioEncontroJovem)
+admin.site.register(Relatorio)
 admin.site.register(Tribo)
 admin.site.register(Grupo)
 admin.site.register(Reuniao)
