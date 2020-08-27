@@ -64,6 +64,7 @@ class Jovens(models.Model):
     def __str__(self):
         return self.nome
 
+
 class Reuniao(models.Model):
     reuniao = models.CharField(max_length=20)
 
@@ -82,10 +83,10 @@ class Relatorio(models.Model):
     data = models.DateField(auto_now_add=True)
 
     class Meta:
-        verbose_name_plural = "Relatorio"
+        verbose_name_plural = " "
 
     def __str__(self):
-        return self.tribo + " - " + self.grupo
+        return self.qnt
 
 #
 # class MyAccountManager(BaseUserManager):
