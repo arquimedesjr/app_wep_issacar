@@ -83,10 +83,10 @@ class Relatorio(models.Model):
     data = models.DateField(auto_now_add=True)
 
     class Meta:
-        verbose_name_plural = " "
+        verbose_name_plural = "Relatorio"
 
     def __str__(self):
-        return self.qnt
+        return str(self.data)
 
 #
 # class MyAccountManager(BaseUserManager):
