@@ -23,25 +23,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5b=3%6e_9zk$12&5i#tv1hn_&zk#sxz50voi3%xzwc$s1d6v3y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # AUTH_USER_MODEL = 'app.Conta'
 # Application definition
 
 INSTALLED_APPS = [
-
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.sessions',
-    'django.contrib.contenttypes',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
     'crispy_forms',
     'app.apps.AppConfig',
-
-
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -57,8 +54,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'gettingstarted.urls'
-LOGIN_URL = 'logar'
-# LOGIN_REDIRECT_URL = 'logar'
+
+
 # LOGOUT_REDIRECT_URL = 'logar'
 
 TEMPLATES = [
@@ -83,23 +80,23 @@ WSGI_APPLICATION = "gettingstarted.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-# }
-
 DATABASES = {
    'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'obxjvmfopaswpx',
-       'USER': 'obxjvmfopaswpx',
-       'PASSWORD': '48141725d171486b9c0f037aa74d74d9e2f9646c7373d3fe39d57ae0c54f0142',
-       'HOST': 'ec2-52-1-95-247.compute-1.amazonaws.com',
-       'PORT': '5432',
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
    }
 }
+
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'obxjvmfopaswpx',
+#        'USER': 'obxjvmfopaswpx',
+#        'PASSWORD': '48141725d171486b9c0f037aa74d74d9e2f9646c7373d3fe39d57ae0c54f0142',
+#        'HOST': 'ec2-52-1-95-247.compute-1.amazonaws.com',
+#        'PORT': '5432',
+#    }
+# }
 
 # DATABASES = {
 #     'default': {
@@ -142,7 +139,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+LOGIN_REDIRECT_URL = 'logar'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/app/static/'
