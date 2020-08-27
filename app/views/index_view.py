@@ -43,6 +43,8 @@ def index(request, template_name="index.html"):
         result_mensal_encontro = []
         result_mensal_encontro_data = []
         result_mensal_algo_data = []
+        result_encontro = (0,)
+        result_algo = (0,)
 
     if type(result_encontro) is not tuple or result_encontro is None:
         result_encontro = (0,)
