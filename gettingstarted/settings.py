@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5b=3%6e_9zk$12&5i#tv1hn_&zk#sxz50voi3%xzwc$s1d6v3y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 # AUTH_USER_MODEL = 'app.Conta'
 # Application definition
