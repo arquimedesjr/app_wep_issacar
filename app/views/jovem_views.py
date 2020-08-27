@@ -6,7 +6,7 @@ from ..forms import *
 
 
 @login_required
-def lista_jovens_presenca(request,tamplate_name="list_jovem.html"):
+def lista_jovens_presenca(request, tamplate_name="list_jovem.html"):
     jovens_presente = Jovens.objects.all()
     jovens = {'lista': jovens_presente}
 
@@ -19,7 +19,7 @@ def lista_jovens_presenca(request,tamplate_name="list_jovem.html"):
 
 def enviar_relatorio(request):
     cursor = connection.cursor()
-    cursor.execute('SELECT COUNT(presenca) from app_jovens WHERE presenca =  %s', ['SIM'])
+    cursor.execute("SELECT COUNT(presenca) from app_jovens WHERE presenca = 'SIM'")
     result = cursor.fetchone()
     print(result)
     reuniao = request.POST.get("reuniao", None)
@@ -33,9 +33,9 @@ def enviar_relatorio(request):
 
     cursor.execute(
         "INSERT INTO app_relatorio "
-        "(grupo_id, tribo_id, data, reuniao_id) "
+        "(grupo_id, tribo_id, data, reuniao_id, qnt_Jovem) "
         "VALUES (%s, %s, %s, %s)",
-        (1, 1, x.strftime("%Y") + '-' + x.strftime("%m") + '-' + x.strftime("%d"), id_reuniao))
+        (1, 1, x.strftime("%Y") + '-' + x.strftime("%m") + '-' + x.strftime("%d"), id_reuniao, result))
 
 
 @login_required
