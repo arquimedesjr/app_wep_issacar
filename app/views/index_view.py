@@ -13,7 +13,7 @@ def index(request, template_name="index.html"):
     consul_relatorio = cursor.fetchone()
     print(consul_relatorio)
 
-    if consul_relatorio is '' or consul_relatorio is None:
+    if consul_relatorio is not '' or consul_relatorio is not None:
         cursor.execute('SELECT qnt_Jovem from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 1')
         result_algo = cursor.fetchone()
         print(result_algo)
