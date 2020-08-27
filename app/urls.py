@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from views.jovem_views import *
+from .views.jovem_views import *
 from .views.login_views import *
 from .views.relatorio_views import *
 from .views.index_view import *
