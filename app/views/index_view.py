@@ -9,6 +9,9 @@ from django.shortcuts import render
 def index(request, template_name="index.html"):
     cursor = connection.cursor()
 
+    cursor.execute('SELECT COUNT(id) from app_jovens')
+    result_qnt_jovem_all = cursor.fetchone()
+
     cursor.execute('SELECT * from app_relatorio')
     consul_relatorio = cursor.fetchone()
     print(consul_relatorio)
@@ -37,7 +40,6 @@ def index(request, template_name="index.html"):
         cursor.execute('SELECT data from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 4')
         result_mensal_algo_data = [i.strftime("%d/%m/%y") for i in itertools.chain(*cursor.fetchall())]
         result_mensal_algo_data.reverse()
-
     else:
         result_mensal_algo = []
         result_mensal_encontro = []
@@ -52,15 +54,12 @@ def index(request, template_name="index.html"):
     if type(result_algo) is not tuple or result_algo is None:
         result_algo = (0,)
 
+    if type(result_qnt_jovem_all) is not tuple or result_qnt_jovem_all is None:
+        result_qnt_jovem_all = (0,)
 
-    print(result_algo)
-    print(result_encontro)
-    print(result_mensal_algo)
-    print(result_mensal_encontro_data)
-    print(result_mensal_algo_data)
-
-    result = result_encontro + result_algo
-    r = {'result': result[0], 'result_algo': result[1], 'result_mensal_algo': result_mensal_algo,
+    result = result_encontro + result_algo + result_qnt_jovem_all
+    r = {'result': result[0], 'result_algo': result[1], 'qnt_all_jovens': result[2],
+         'result_mensal_algo': result_mensal_algo,
          'result_mensal_encontro': result_mensal_encontro,
          'result_mensal_encontro_data': result_mensal_encontro_data,
          'result_mensal_algo_data': result_mensal_algo_data}
