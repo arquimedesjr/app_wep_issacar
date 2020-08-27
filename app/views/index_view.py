@@ -8,30 +8,30 @@ from django.shortcuts import render
 @login_required
 def index(request, template_name="index.html"):
     cursor = connection.cursor()
-    cursor.execute('SELECT (qnt_Jovem) from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 1')
+    cursor.execute('SELECT qnt_Jovem from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 1')
     result_algo = cursor.fetchone()
     print(result_algo)
     cursor = connection.cursor()
-    cursor.execute('SELECT (qnt_Jovem) from app_relatorio WHERE reuniao_id = 2 ORDER by id DESC LIMIT 1')
+    cursor.execute('SELECT qnt_Jovem from app_relatorio WHERE reuniao_id = 2 ORDER by id DESC LIMIT 1')
     result_encontro = cursor.fetchone()
     print(result_encontro)
     cursor = connection.cursor()
-    cursor.execute('SELECT (qnt_Jovem) from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 4')
+    cursor.execute('SELECT qnt_Jovem from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 4')
     result_mensal_algo = [i for i in itertools.chain(*cursor.fetchall())]
     result_mensal_algo.reverse()
 
     cursor = connection.cursor()
-    cursor.execute('SELECT (qnt_Jovem) from app_relatorio WHERE reuniao_id = 2 ORDER by id DESC LIMIT 4')
+    cursor.execute('SELECT qnt_Jovem from app_relatorio WHERE reuniao_id = 2 ORDER by id DESC LIMIT 4')
     result_mensal_encontro = [i for i in itertools.chain(*cursor.fetchall())]
     result_mensal_encontro.reverse()
     cursor = connection.cursor()
 
-    cursor.execute('SELECT (data) from app_relatorio WHERE reuniao_id = 2 ORDER by id DESC LIMIT 4')
+    cursor.execute('SELECT data from app_relatorio WHERE reuniao_id = 2 ORDER by id DESC LIMIT 4')
     result_mensal_encontro_data = [i.strftime("%d/%m/%y") for i in itertools.chain(*cursor.fetchall())]
     result_mensal_encontro_data.reverse()
     cursor = connection.cursor()
 
-    cursor.execute('SELECT (data) from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 4')
+    cursor.execute('SELECT data from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 4')
     result_mensal_algo_data = [i.strftime("%d/%m/%y") for i in itertools.chain(*cursor.fetchall())]
     result_mensal_algo_data.reverse()
 
