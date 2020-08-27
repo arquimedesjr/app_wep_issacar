@@ -21,7 +21,7 @@ def enviar_relatorio(request):
     cursor = connection.cursor()
     cursor.execute('SELECT COUNT(presenca) from app_jovens WHERE presenca =  %s', ['SIM'])
     result = cursor.fetchone()
-
+    print(result)
     reuniao = request.POST.get("reuniao", None)
     id_reuniao = 2
 
@@ -32,10 +32,10 @@ def enviar_relatorio(request):
         x = datetime.datetime.now()
 
     cursor.execute(
-        'INSERT INTO app_relatorio '
-        '(qnt_Jovem, grupo_id, tribo_id, data, reuniao_id) '
-        'VALUES (%s, %s, %s, %s, %s)',
-        (result[0], 1, 1, x.strftime("%Y") + '-' + x.strftime("%m") + '-' + x.strftime("%d"), id_reuniao))
+        "INSERT INTO app_relatorio "
+        "('grupo_id', 'tribo_id', 'data', 'reuniao_id') "
+        "VALUES (%s, %s, %s, %s, %s)",
+        (1, 1, x.strftime("%Y") + '-' + x.strftime("%m") + '-' + x.strftime("%d"), id_reuniao))
 
 
 @login_required

@@ -104,11 +104,11 @@ class Reuniao(models.Model):
 
 
 class Relatorio(models.Model):
-    qnt_Jovem = models.IntegerField()
+    qnt_Jovem = models.CharField(max_length=20)
     tribo = models.ForeignKey(Tribo, on_delete=models.CASCADE)
     grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE)
     reuniao = models.ForeignKey(Reuniao, on_delete=models.CASCADE)
-    data = models.DateField(auto_now_add=True)
+    data = models.CharField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = "Relatorio"
