@@ -19,7 +19,7 @@ def lista_jovens_presenca(request,tamplate_name="list_jovem.html"):
 
 def enviar_relatorio(request):
     cursor = connection.cursor()
-    cursor.execute('SELECT COUNT(presenca) from app_jovens WHERE presenca ==  %s', ['SIM'])
+    cursor.execute('SELECT COUNT(presenca) from app_jovens WHERE presenca =  %s', ['SIM'])
     result = cursor.fetchone()
 
     reuniao = request.POST.get("reuniao", None)
