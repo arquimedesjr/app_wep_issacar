@@ -6,6 +6,7 @@ automium==0.2.6
 automium-web==0.1.1
 beautifulsoup4==4.9.1
 bootstrap4==0.1.0
+cheroot==8.4.5
 Click==7.0
 colorama==0.4.3
 distlib==0.3.0
@@ -37,11 +38,13 @@ gunicorn==20.0.4
 importlib-metadata==1.7.0
 isort==4.3.21
 itsdangerous==1.1.0
+jaraco.functools==3.0.1
 Jinja2==2.11.1
 lazy-object-proxy==1.4.3
 legacy==0.1.6
 MarkupSafe==1.1.1
 mccabe==0.6.1
+more-itertools==8.4.0
 numpy==1.19.1
 pandas==1.1.1
 Pillow==7.0.0
@@ -58,6 +61,7 @@ tk==0.1.0
 typed-ast==1.4.1
 Unidecode==1.1.1
 virtualenv==20.0.16
+web.py==0.61
 Werkzeug==1.0.0
 whitenoise==5.0.1
 wrapt==1.11.2
