@@ -17,49 +17,49 @@ Dashboard
     <div class="row">
         <div class="panel panel-primary filterable">
             <div class="panel-heading">
-                <h3 class="panel-title">Users</h3>
+                <h3 class="panel-title">Relatório</h3>
                 <button class="btn btn-default pull-right btn-xs btn-filter"><span
                         class="glyphicon glyphicon-filter"></span>
                     Filter
                 </button>
 
             </div>
-            <table class="table table-responsive-sm">
-                <thead>
-                <tr class="filters">
-                    <th><input type="text" class="form-control" placeholder="#" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Quantidade" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Tribo" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Grupo" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Reunião" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Data" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Opção" disabled></th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for rel in lista %}
-                <tr>
-                    <td>
-                        {{rel.qnt}}
-                    </td>
-                    <td>{{rel.tribo}}</td>
-                    <td>
-                        {{rel.grupo}}
-                    </td>
-                    <td>
-                        {{rel.reuniao}}
-                    </td>
-                    <td>
-                        {{rel.data}}
-                    </td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+            <div class="table-responsive-md">
+                <table class="table">
+                    <thead>
+                    <tr class="filters">
+                        <th><input type="text" class="form-control" placeholder="Quantidade" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Tribo" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Grupo" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Reunião" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Data" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Opção" disabled></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for rel in lista %}
+                    <tr>
+                        <td>
+                            {{rel.qnt}}
+                        </td>
+                        <td>{{rel.tribo}}</td>
+                        <td>
+                            {{rel.grupo}}
+                        </td>
+                        <td>
+                            {{rel.reuniao}}
+                        </td>
+                        <td>
+                            {{rel.data}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
-
 
 {% endblock %}
 
@@ -108,6 +108,7 @@ $(document).ready(function(){
         }
     });
 });
+
 
 </script>
 {% endblock %}
