@@ -13,50 +13,50 @@ Dashboard
 
 <div class="container">
 
-    <h5 class="text-center">Lista de Jovens</h5>
+    <h3 class="text-center">Lista de Jovens</h3>
 
     <div class="row ">
 
-        {% for jovens in lista %}
 
+        {% for jovens in lista %}
         <div class="col-6 col-sm-3 text-center mt-3">
+
             <img src="{{jovens.foto.url}}" width="160" height="150" alt="">
 
+
+            <h5><b> {{jovens.nome}} </b></h5>
             <p>
-            <h5> {{jovens.nome}} </h5>
+                <a href="https://api.whatsapp.com/send?phone=55{{jovens.telefone}}&text=Oi {{jovens.nome}}, tudo bem? Senti sua falta hoje na reunião"
+                   class="card-link">
+                    <img src="{% static 'img/whatsapp.png' %}">
+                </a>
+
+                <a href="{% url 'edit_jovem' pk=jovens.pk %}" class="card-link">
+                    <img src="{% static 'img/edit.png' %}">
+                </a>
+
+                <a href="{% url 'delete_jovem' pk=jovens.pk %}" class="card-link">
+                    <img src="{% static 'img/delete.png' %}">
+                </a>
+
+                <a href="{% url 'presenca_jovem' pk=jovens.pk %}" class="card-link">
+                    {% if "SIM" == jovens.presenca %}
+                    <img src="{% static 'img/ok.png' %}">
+                    {% else %}
+                    <img src="{% static 'img/x.png' %}">
+                    {% endif %}
+                </a>
             </p>
-
-            <a href="https://api.whatsapp.com/send?phone=55{{jovens.telefone}}&text=Oi {{jovens.nome}}, tudo bem? Senti sua falta hoje na reunião">
-                <img src="{% static 'img/whatsapp.png' %}">
-            </a>
-
-
-            <a href="{% url 'edit_jovem' pk=jovens.pk %}">
-                <img src="{% static 'img/edit.png' %}">
-            </a>
-
-            <a href="{% url 'delete_jovem' pk=jovens.pk %}">
-                <img src="{% static 'img/delete.png' %}">
-            </a>
-
-            <a href="{% url 'presenca_jovem' pk=jovens.pk %}">
-                {% if "SIM" == jovens.presenca %}
-                <img src="{% static 'img/ok.png' %}">
-                {% else %}
-                <img src="{% static 'img/x.png' %}">
-                {% endif %}
-            </a>
-
         </div>
         {% endfor %}
-
-
     </div>
 
-    {% endblock %}
+</div>
+
+{% endblock %}
 
 
-    {% block scripts %}
+{% block scripts %}
 
-    {% endblock %}
+{% endblock %}
 

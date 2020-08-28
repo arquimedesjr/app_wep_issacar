@@ -37,7 +37,7 @@ def enviar_relatorio(request):
         "INSERT INTO app_relatorio "
         "(grupo_id, tribo_id, data, reuniao_id, qnt) "
         "VALUES (%s, %s, %s, %s, %s)",
-        (1, 1, x.strftime("%Y") + '-' + x.strftime("%m") + '-' + x.strftime("%d"), id_reuniao, result))
+        [1, 1, x.strftime("%Y") + '-' + x.strftime("%m") + '-' + x.strftime("%d"), id_reuniao, result[0]])
 
 
 @login_required

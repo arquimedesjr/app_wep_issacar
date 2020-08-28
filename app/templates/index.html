@@ -27,16 +27,17 @@ Dashboard
                         <div class="col mr-2" action="{% url 'deslogar' %}">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Encontro jovem
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{result}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{result}}
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        <div class="text-right">
+                            {{result_encotro_data}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
 
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
@@ -45,10 +46,12 @@ Dashboard
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Algo A +
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{result_algo}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{result_algo}}
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        <div class="text-right">
+                            {{result_algo_data}}
                         </div>
                     </div>
                 </div>
@@ -60,12 +63,10 @@ Dashboard
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2" action="{% url 'deslogar' %}">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Quantidade de Jovens Cadastrado
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Quantidade de Jovens
+                                Cadastrado
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{qnt_all_jovens}}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -286,6 +287,11 @@ var myLineChart = new Chart(ctx, {
     },
   }
 });
+
+
+
+
+
 
 </script>
 {% endblock %}

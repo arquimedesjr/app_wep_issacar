@@ -14,11 +14,20 @@ def index(request, template_name="index.html"):
 
     cursor.execute('SELECT * from app_relatorio')
     consul_relatorio = cursor.fetchone()
-    print(consul_relatorio)
 
     if consul_relatorio is not None:
         cursor.execute('SELECT qnt from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 1')
         result_algo = cursor.fetchone()
+
+        cursor.execute('SELECT data from app_relatorio WHERE reuniao_id = 1 ORDER by id DESC LIMIT 1')
+        result_algo_data = cursor.fetchone()
+        if result_algo_data is not None:
+            result_algo_data = result_algo_data[0].strftime("%d/%m/%y")
+
+        cursor.execute('SELECT data from app_relatorio WHERE reuniao_id = 2 ORDER by id DESC LIMIT 1')
+        result_encontro_data = cursor.fetchone()
+        if result_encontro_data is not None:
+            result_encontro_data = result_encontro_data[0].strftime("%d/%m/%y")
 
         cursor.execute('SELECT qnt from app_relatorio WHERE reuniao_id = 2 ORDER by id DESC LIMIT 1')
         result_encontro = cursor.fetchone()
@@ -47,6 +56,8 @@ def index(request, template_name="index.html"):
         result_mensal_algo_data = []
         result_encontro = (0,)
         result_algo = (0,)
+        result_algo_data = ''
+        result_encontro_data = ''
 
     if type(result_encontro) is not tuple or result_encontro is None:
         result_encontro = (0,)
@@ -62,7 +73,8 @@ def index(request, template_name="index.html"):
          'result_mensal_algo': result_mensal_algo,
          'result_mensal_encontro': result_mensal_encontro,
          'result_mensal_encontro_data': result_mensal_encontro_data,
-         'result_mensal_algo_data': result_mensal_algo_data}
+         'result_mensal_algo_data': result_mensal_algo_data,
+         'result_algo_data': result_algo_data, 'result_encontro_data': result_encontro_data}
 
     return render(request, template_name, r)
 
