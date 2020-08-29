@@ -27,19 +27,19 @@ Dashboard
             <h6 class="text-nowrap"><b> {{jovens.nome}} </b></h6>
             <p>
                 <a href="https://api.whatsapp.com/send?phone=55{{jovens.telefone}}&text=Oi {{jovens.nome}}, tudo bem? Senti sua falta hoje na reunião"
-                   class="card-link">
+                   >
                     <img src="{% static 'img/whatsapp.png' %}">
                 </a>
 
-                <a href="{% url 'edit_jovem' pk=jovens.pk %}" class="card-link">
+                <a href="{% url 'edit_jovem' pk=jovens.pk %}" >
                     <img src="{% static 'img/edit.png' %}">
                 </a>
 
-                <a href="{% url 'delete_jovem' pk=jovens.pk %}" class="card-link">
+                <a href="{% url 'delete_jovem' pk=jovens.pk %}" >
                     <img src="{% static 'img/delete.png' %}">
                 </a>
 
-                <a href="{% url 'presenca_jovem' pk=jovens.pk %}" class="card-link">
+                <a href="{% url 'presenca_jovem' pk=jovens.pk %}" >
                     {% if "SIM" == jovens.presenca %}
                     <img src="{% static 'img/ok.png' %}">
                     {% else %}
