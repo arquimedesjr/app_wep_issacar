@@ -39,6 +39,10 @@ def enviar_relatorio(request):
         "VALUES (%s, %s, %s, %s, %s)",
         [1, 1, x.strftime("%Y") + '-' + x.strftime("%m") + '-' + x.strftime("%d"), id_reuniao, result[0]])
 
+    cursor.execute(
+        "UPDATE app_jovens "
+        " SET presenca = 'NÃO' WHERE presenca = 'SIM'")
+
 
 @login_required
 def cadastrarJovem(request, template_name='jovem_form.html'):
