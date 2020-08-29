@@ -46,7 +46,7 @@ class Grupo(models.Model):
 
 class Jovens(models.Model):
     foto = models.ImageField(upload_to='images', verbose_name='Foto')
-    nome = models.CharField(max_length=250, null=False, verbose_name='Nome')
+    nome = models.CharField(max_length=250, null=False, verbose_name='Nome - Ex: (Arquimedes Junior)')
     telefone = models.CharField(max_length=11, null=False, verbose_name='Telefone - Ex: 11948924982')
     tribo = models.ForeignKey(Tribo, on_delete=models.CASCADE)
     grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE)
