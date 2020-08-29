@@ -61,7 +61,7 @@ def cadastrarJovem(request, template_name='jovem_form.html'):
 def editar_jovem(request, pk, template_name='chamada_form.html'):
     jovem = get_object_or_404(Jovens, pk=pk)
     if request.method == "POST":
-        form = EditJovemForm(request.POST, instance=jovem)
+        form = EditJovemForm(request.POST, request.FILES, instance=jovem)
         if form.is_valid():
             form.save()
             return redirect('lista_jovens')
