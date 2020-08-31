@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -71,17 +72,16 @@ TEMPLATES = [
     }
 ]
 
-
 WSGI_APPLICATION = "gettingstarted.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 # DATABASES = {
@@ -137,16 +137,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/app/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'app')
 
 TATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+AWS_ACCESS_KEY_ID = 'AKIA6LKHO4352MMSAKXV'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'django-app-web-issacar'
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 django_heroku.settings(locals())
