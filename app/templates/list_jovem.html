@@ -21,25 +21,25 @@ Lista de Jovens
         {% for jovens in lista %}
         <div class="col-6 col-sm-3 text-center mt-3">
 
-            <img src="{{jovens.foto.url}}" width="140" height="130" alt="">
+            <img class="rounded-circle article-img" src="{{jovens.foto.url}}" width="140" height="130" alt="">
 
 
             <h6 class="text-nowrap"><b> {{jovens.nome}} </b></h6>
             <p>
                 <a href="https://api.whatsapp.com/send?phone=55{{jovens.telefone}}&text=Oi {{jovens.nome}}, tudo bem? Senti sua falta hoje na reunião"
-                   >
+                >
                     <img src="{% static 'img/whatsapp.png' %}">
                 </a>
 
-                <a href="{% url 'edit_jovem' pk=jovens.pk %}" >
+                <a href="{% url 'edit_jovem' pk=jovens.pk %}">
                     <img src="{% static 'img/edit.png' %}">
                 </a>
 
-                <a href="{% url 'delete_jovem' pk=jovens.pk %}" >
+                <a href="{% url 'delete_jovem' pk=jovens.pk %}">
                     <img src="{% static 'img/delete.png' %}">
                 </a>
 
-                <a href="{% url 'presenca_jovem' pk=jovens.pk %}" >
+                <a href="{% url 'presenca_jovem' pk=jovens.pk %}">
                     {% if "SIM" == jovens.presenca %}
                     <img src="{% static 'img/ok.png' %}">
                     {% else %}
