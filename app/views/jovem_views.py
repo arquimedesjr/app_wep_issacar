@@ -7,7 +7,7 @@ from ..forms import *
 
 @login_required
 def lista_jovens_presenca(request, tamplate_name="list_jovem.html"):
-    jovens_presente = Jovens.objects.all()
+    jovens_presente = Jovens.objects.order_by()
     jovens = {'lista': jovens_presente}
 
     if request.method == "POST":

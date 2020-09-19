@@ -12,6 +12,9 @@ def index(request, template_name="index.html"):
     cursor.execute('SELECT COUNT(id) from app_jovens')
     result_qnt_jovem_all = cursor.fetchone()
 
+    cursor.execute("SELECT COUNT(id) from app_jovens WHERE presenca = 'SIM'")
+    qnt_jovem_presenca = cursor.fetchone()
+
     cursor.execute('SELECT * from app_relatorio')
     consul_relatorio = cursor.fetchone()
 
@@ -68,13 +71,17 @@ def index(request, template_name="index.html"):
     if type(result_qnt_jovem_all) is not tuple or result_qnt_jovem_all is None:
         result_qnt_jovem_all = (0,)
 
+    if type(qnt_jovem_presenca) is not tuple or qnt_jovem_presenca is None:
+        qnt_jovem_presenca = (0,)
+
     result = result_encontro + result_algo + result_qnt_jovem_all
     r = {'result': result[0], 'result_algo': result[1], 'qnt_all_jovens': result[2],
          'result_mensal_algo': result_mensal_algo,
          'result_mensal_encontro': result_mensal_encontro,
          'result_mensal_encontro_data': result_mensal_encontro_data,
          'result_mensal_algo_data': result_mensal_algo_data,
-         'result_algo_data': result_algo_data, 'result_encontro_data': result_encontro_data}
+         'result_algo_data': result_algo_data, 'result_encontro_data': result_encontro_data,
+         "qnt_jovem_presenca": qnt_jovem_presenca[0]}
 
     return render(request, template_name, r)
 
