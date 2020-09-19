@@ -7,8 +7,15 @@ from ..forms import *
 
 @login_required
 def lista_jovens_presenca(request, tamplate_name="list_jovem.html"):
-    jovens_presente = Jovens.objects.order_by('id')
-    jovens = {'lista': jovens_presente}
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterJovem()
+
+    if query:
+        jovens_presente = Jovens.objects.filter(nome__contains=query)
+    else:
+        jovens_presente = Jovens.objects.order_by('id')
+
+    jovens = {'lista': jovens_presente, "filtro": campoFiltro}
 
     if request.method == "POST":
         enviar_relatorio(request)

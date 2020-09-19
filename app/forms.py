@@ -33,3 +33,8 @@ class RelatorioForm(forms.ModelForm):
     class Meta:
         model = Relatorio
         fields = ['reuniao']
+
+
+class FilterJovem(forms.Form):
+    campoFilter = forms.CharField(label=False, max_length=100)
+    campoFilter.widget.attrs.update({'class': 'form-control', 'placeholder': 'Pesquisar Jovem'})
