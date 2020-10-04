@@ -46,6 +46,7 @@ class Grupo(models.Model):
 
 class Jovens(models.Model):
     foto = models.ImageField(upload_to='profile_pics', verbose_name='Foto')
+    foto_base64 = models.CharField(max_length=2000000, null=False)
     nome = models.CharField(max_length=250, null=False, verbose_name='Nome - Ex: (Arquimedes Junior)')
     telefone = models.CharField(max_length=11, null=False, verbose_name='Telefone - Ex: 11948924982')
     tribo = models.ForeignKey(Tribo, on_delete=models.CASCADE)
@@ -60,9 +61,6 @@ class Jovens(models.Model):
 
     class Meta:
         verbose_name_plural = "Jovens"
-
-    def __str__(self):
-        return self.nome
 
 
 class Reuniao(models.Model):

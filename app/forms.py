@@ -11,6 +11,12 @@ class JovemForm(forms.ModelForm):
         fields = ['foto', 'nome', 'telefone', 'tribo', 'grupo', 'presenca']
 
 
+class JovemBase64(forms.ModelForm):
+    class Meta:
+        model = Jovens
+        fields = ['foto_base64']
+
+
 class EditJovemForm(forms.ModelForm):
     class Meta:
         model = Jovens

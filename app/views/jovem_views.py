@@ -1,8 +1,13 @@
+from urllib.request import urlopen
+
 from django.contrib.auth.decorators import login_required
+from django.contrib.sites import requests
 from django.db import connection
 from django.shortcuts import render, redirect, get_object_or_404
 
 from ..forms import *
+import base64
+from io import BytesIO
 
 
 @login_required
@@ -55,9 +60,11 @@ def enviar_relatorio(request):
 def cadastrarJovem(request, template_name='jovem_form.html'):
     if request.method == 'POST':
         form_jovem = JovemForm(request.POST, request.FILES)
-        print(form_jovem)
         if form_jovem.is_valid():
-            form_jovem.save()
+            jovem = form_jovem.save(commit=False)
+            encoded_string = base64.b64encode(request.FILES['foto'].read())
+            jovem.foto_base64 = encoded_string.decode('utf-8')
+            jovem.save()
             return redirect('lista_jovens')
     else:
         form_jovem = JovemForm()
