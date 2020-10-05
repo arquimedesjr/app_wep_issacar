@@ -46,7 +46,7 @@ class Grupo(models.Model):
 
 class Jovens(models.Model):
     foto = models.ImageField(upload_to='profile_pics', verbose_name='Foto')
-    foto_base64 = models.CharField(max_length=2000000, null=False)
+    foto_base64 = models.CharField(max_length=2000000000000000)
     nome = models.CharField(max_length=250, null=False, verbose_name='Nome - Ex: (Arquimedes Junior)')
     telefone = models.CharField(max_length=11, null=False, verbose_name='Telefone - Ex: 11948924982')
     tribo = models.ForeignKey(Tribo, on_delete=models.CASCADE)
@@ -79,6 +79,7 @@ class Relatorio(models.Model):
     grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE)
     reuniao = models.ForeignKey(Reuniao, on_delete=models.CASCADE)
     data = models.DateField()
+
     class Meta:
         verbose_name_plural = "Relatorio"
 
