@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='jovens',
             name='foto_base64',
-            field=models.CharField(max_length=2000000000000000),
+            field=models.CharField(max_length=999999999999),
         ),
     ]
