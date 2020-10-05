@@ -38,7 +38,7 @@ class PresencaForm(forms.ModelForm):
 class RelatorioForm(forms.ModelForm):
     class Meta:
         model = Relatorio
-        fields = ['reuniao']
+        fields = ['reuniao', 'data']
 
 
 class FilterJovem(forms.Form):

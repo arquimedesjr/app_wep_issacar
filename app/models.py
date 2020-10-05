@@ -78,7 +78,7 @@ class Relatorio(models.Model):
     tribo = models.ForeignKey(Tribo, on_delete=models.CASCADE)
     grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE)
     reuniao = models.ForeignKey(Reuniao, on_delete=models.CASCADE)
-    data = models.DateField(auto_now_add=True)
+    data = models.DateField()
 
     class Meta:
         verbose_name_plural = "Relatorio"
