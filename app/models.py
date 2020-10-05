@@ -79,7 +79,6 @@ class Relatorio(models.Model):
     grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE)
     reuniao = models.ForeignKey(Reuniao, on_delete=models.CASCADE)
     data = models.DateField()
-
     class Meta:
         verbose_name_plural = "Relatorio"
 
