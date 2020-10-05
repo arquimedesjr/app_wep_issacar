@@ -17,6 +17,8 @@ urlpatterns = (
 
     url('lista_jovem/$', lista_jovens_presenca, name='lista_jovens'),
 
+    url('lista_jovem_nao/$', lista_jovens_nao_presenca, name='lista_jovens_nao'),
+
     url(r'^delet_jovem/(?P<pk>[0-9]+)', delete_jovem, name='delete_jovem'),
 
     url(r'^edit_jovem/(?P<pk>[0-9]+)', editar_jovem, name='edit_jovem'),

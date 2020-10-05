@@ -13,7 +13,7 @@ Lista de Jovens
 
 <div class="container">
 
-    <h3 class="text-center">Lista de Jovens</h3>
+    <h3 class="text-center">Lista de Jovens Faltantes</h3>
     <div class="d-flex justify-content-center">
         <form method="GET" action="">
             <div class="input-group mb-0">
@@ -41,22 +41,6 @@ Lista de Jovens
                 <a href="https://api.whatsapp.com/send?phone=55{{jovens.telefone}}"
                 >
                     <img src="{% static 'img/whatsapp.png' %}">
-                </a>
-
-                <a href="{% url 'edit_jovem' pk=jovens.pk %}">
-                    <img src="{% static 'img/edit.png' %}">
-                </a>
-
-                <a href="{% url 'delete_jovem' pk=jovens.pk %}">
-                    <img src="{% static 'img/delete.png' %}">
-                </a>
-
-                <a href="{% url 'presenca_jovem' pk=jovens.pk %}">
-                    {% if "SIM" == jovens.presenca %}
-                    <img src="{% static 'img/ok.png' %}">
-                    {% else %}
-                    <img src="{% static 'img/x.png' %}">
-                    {% endif %}
                 </a>
             </p>
         </div>

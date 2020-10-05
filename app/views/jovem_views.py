@@ -29,12 +29,37 @@ def lista_jovens_presenca(request, tamplate_name="list_jovem.html"):
     return render(request, tamplate_name, jovens)
 
 
+@login_required
+def lista_jovens_nao_presenca(request, tamplate_name="list_jovem_nao.html"):
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterJovem()
+
+    if query:
+        jovens_presente = JovensNaoPresente.objects.filter(nome__contains=query)
+    else:
+        jovens_presente = JovensNaoPresente.objects.order_by('id')
+
+    jovens = {'lista': jovens_presente, "filtro": campoFiltro}
+
+    return render(request, tamplate_name, jovens)
+
+
+@login_required
 def enviar_relatorio(request):
     cursor = connection.cursor()
 
     cursor.execute("SELECT COUNT(presenca) from app_jovens WHERE presenca = 'SIM'")
     result = cursor.fetchone()
-    print(result)
+
+    cursor.execute("DELETE FROM app_jovensnaopresente")
+    cursor.fetchall()
+
+    cursor.execute("SELECT *  from app_jovens WHERE presenca = 'NÃO'")
+    result_jovens_nao = cursor.fetchall()
+
+    print(result_jovens_nao)
+
+    cursor.executemany("INSERT INTO app_jovensnaopresente VALUES(?,?,?,?,?,?,?,?,?)", result_jovens_nao)
 
     reuniao = request.POST.get("reuniao", None)
     id_reuniao = 2
@@ -72,6 +97,7 @@ def cadastrarJovem(request, template_name='jovem_form.html'):
         'form': form_jovem})
 
 
+@login_required
 def editar_jovem(request, pk, template_name='chamada_form.html'):
     jovem = get_object_or_404(Jovens, pk=pk)
     if request.method == "POST":
@@ -84,6 +110,7 @@ def editar_jovem(request, pk, template_name='chamada_form.html'):
     return render(request, template_name, {'form': form})
 
 
+@login_required
 def presenca_jovem(request, pk, template_name='chamada_form.html'):
     jovem = get_object_or_404(Jovens, pk=pk)
     if request.method == "POST":
@@ -96,6 +123,7 @@ def presenca_jovem(request, pk, template_name='chamada_form.html'):
     return render(request, template_name, {'form': form})
 
 
+@login_required
 def delete_jovem(request, pk, template_name='jovem_delete_form.html'):
     jovem = Jovens.objects.get(pk=pk)
     if request.method == "POST":

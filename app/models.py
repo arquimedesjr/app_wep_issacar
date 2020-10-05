@@ -63,6 +63,25 @@ class Jovens(models.Model):
         verbose_name_plural = "Jovens"
 
 
+class JovensNaoPresente(models.Model):
+    foto = models.ImageField(upload_to='profile_pics', verbose_name='Foto')
+    foto_base64 = models.TextField()
+    nome = models.CharField(max_length=250, null=False, verbose_name='Nome - Ex: (Arquimedes Junior)')
+    telefone = models.CharField(max_length=11, null=False, verbose_name='Telefone - Ex: 11948924982')
+    tribo = models.ForeignKey(Tribo, on_delete=models.CASCADE)
+    grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE)
+
+    MY_CHOICES = (
+        ('SIM', 'SIM'),
+        ('NÃO', 'NÃO'),
+    )
+    presenca = models.CharField(max_length=3, choices=MY_CHOICES, verbose_name='Está na Reunião?', default='NÃO')
+    data = models.DateField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Jovens não presente"
+
+
 class Reuniao(models.Model):
     reuniao = models.CharField(max_length=20)
 
@@ -79,6 +98,7 @@ class Relatorio(models.Model):
     grupo = models.ForeignKey(Grupo, on_delete=models.CASCADE)
     reuniao = models.ForeignKey(Reuniao, on_delete=models.CASCADE)
     data = models.DateField()
+
     class Meta:
         verbose_name_plural = "Relatorio"
 
