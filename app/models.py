@@ -65,7 +65,6 @@ class Jovens(models.Model):
 
 class JovensNaoPresente(models.Model):
     foto = models.ImageField(upload_to='profile_pics', verbose_name='Foto')
-    foto_base64 = models.TextField()
     nome = models.CharField(max_length=250, null=False, verbose_name='Nome - Ex: (Arquimedes Junior)')
     telefone = models.CharField(max_length=11, null=False, verbose_name='Telefone - Ex: 11948924982')
     tribo = models.ForeignKey(Tribo, on_delete=models.CASCADE)

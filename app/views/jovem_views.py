@@ -71,7 +71,7 @@ def enviar_relatorio(request):
 
     print(result_jovens_nao)
 
-    cursor.executemany("INSERT INTO app_jovensnaopresente VALUES(?,?,?,?,?,?,?,?,?)", result_jovens_nao)
+    cursor.executemany("INSERT INTO app_jovensnaopresente VALUES(?,?,?,?,?,?,?,?)", result_jovens_nao)
 
     reuniao = request.POST.get("reuniao", None)
     id_reuniao = 2
@@ -98,10 +98,7 @@ def cadastrarJovem(request, template_name='jovem_form.html'):
     if request.method == 'POST':
         form_jovem = JovemForm(request.POST, request.FILES)
         if form_jovem.is_valid():
-            jovem = form_jovem.save(commit=False)
-            encoded_string = base64.b64encode(request.FILES['foto'].read())
-            jovem.foto_base64 = encoded_string.decode('utf-8')
-            jovem.save()
+            form_jovem.save()
             return redirect('lista_jovens')
     else:
         form_jovem = JovemForm()
