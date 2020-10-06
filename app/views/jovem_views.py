@@ -51,8 +51,12 @@ def enviar_relatorio(request):
     cursor.execute("SELECT COUNT(presenca) from app_jovens WHERE presenca = 'SIM'")
     result = cursor.fetchone()
 
-    cursor.execute("DELETE FROM app_jovensnaopresente")
-    cursor.fetchall()
+    cursor.execute("SELECT * FROM app_jovensnaopresente")
+    jovensnaopresente = cursor.fetchall()
+
+    if len(jovensnaopresente) is not 0:
+        cursor.execute("DELETE FROM app_jovensnaopresente")
+        cursor.fetchall()
 
     cursor.execute("SELECT *  from app_jovens WHERE presenca = 'NÃO'")
     result_jovens_nao = cursor.fetchall()
