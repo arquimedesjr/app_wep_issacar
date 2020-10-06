@@ -83,7 +83,7 @@ def enviar_relatorio(request):
     if result[0] > 0:
         x = datetime.datetime.now()
 
-    if not result:
+    if len(result) is not 0:
         cursor.execute(
             "INSERT INTO app_relatorio "
             "(grupo_id, tribo_id, data, reuniao_id, qnt) "
