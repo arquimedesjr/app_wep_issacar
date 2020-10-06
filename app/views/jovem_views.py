@@ -32,7 +32,7 @@ def lista_jovens_presenca(request, tamplate_name="list_jovem.html"):
         jovens = {'lista': jovens_presente, "filtro": campoFiltro}
 
     if request.method == "POST":
-        if enviar_relatorio(request) is None:
+        if enviar_relatorio(request) is False:
             messages.warning(request, 'Não foi informado presença em nenhum jovem')
             return redirect("lista_jovens")
         return redirect('index')
@@ -48,7 +48,7 @@ def lista_jovens_nao_presenca(request, tamplate_name="list_jovem_nao.html"):
     if query:
         jovens_presente = JovensNaoPresente.objects.filter(nome__contains=query)
     else:
-        jovens_presente = JovensNaoPresente.objects.order_by('id')
+        jovens_presente = JovensNaoPresente.objects.all().order_by('nome')
 
     jovens = {'lista': jovens_presente, "filtro": campoFiltro}
 
@@ -62,39 +62,41 @@ def enviar_relatorio(request):
     cursor.execute("SELECT COUNT(presenca) from app_jovens WHERE presenca = 'SIM'")
     result = cursor.fetchone()
 
-    cursor.execute("SELECT * FROM app_jovensnaopresente")
-    jovensnaopresente = cursor.fetchall()
+    if result[0] is not 0:
 
-    if len(jovensnaopresente) is not 0:
-        cursor.execute("DELETE FROM app_jovensnaopresente")
-        cursor.fetchall()
+        cursor.execute("SELECT * FROM app_jovensnaopresente")
+        jovensnaopresente = cursor.fetchall()
 
-        cursor.execute("SELECT *  from app_jovens WHERE presenca = 'NÃO'")
-        result_jovens_nao = cursor.fetchall()
+        if len(jovensnaopresente) is not 0:
+            cursor.execute("DELETE FROM app_jovensnaopresente")
+            jovensnaopresente = cursor.fetchall()
 
-        cursor.executemany("INSERT INTO app_jovensnaopresente VALUES(%s, %s, %s, %s, %s,%s, %s, %s)", result_jovens_nao)
+        reuniao = request.POST.get("reuniao", None)
+        id_reuniao = 2
 
-    reuniao = request.POST.get("reuniao", None)
-    id_reuniao = 2
+        if reuniao == 'Algo A +':
+            id_reuniao = 1
 
-    if reuniao == 'Algo A +':
-        id_reuniao = 1
-
-    if result[0] > 0:
         x = datetime.datetime.now()
 
-    if len(result) is not 0:
         cursor.execute(
             "INSERT INTO app_relatorio "
             "(grupo_id, tribo_id, data, reuniao_id, qnt) "
             "VALUES (%s, %s, %s, %s, %s)",
             [1, 1, x.strftime("%Y") + '-' + x.strftime("%m") + '-' + x.strftime("%d"), id_reuniao, result[0]])
 
+        cursor.execute("SELECT *  from app_jovens WHERE presenca = 'NÃO'")
+        result_jovens_nao = cursor.fetchall()
+
+        cursor.executemany("INSERT INTO app_jovensnaopresente VALUES(%s, %s, %s, %s, %s,%s, %s, %s)", result_jovens_nao)
+
         cursor.execute(
             "UPDATE app_jovens "
             " SET presenca = 'NÃO' WHERE presenca = 'SIM'")
+
+        return True
     else:
-        return None
+        return False
 
 
 @login_required
