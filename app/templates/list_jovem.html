@@ -33,7 +33,7 @@ Lista de Jovens
         {% for jovens in lista %}
         <div class="col-6 col-sm-3 text-center mt-3">
 
-            <img class="rounded-circle article-img" src="data:image/png;base64, {{jovens.foto.url}}" width="140" height="130" alt="">
+            <img class="rounded-circle article-img" src="{{jovens.foto.url}}" width="140" height="130" alt="">
 
 
             <h6 class="text-nowrap"><b> {{jovens.nome}} </b></h6>
