@@ -71,7 +71,7 @@ def enviar_relatorio(request):
 
     print(result_jovens_nao)
 
-    cursor.executemany("INSERT INTO app_jovensnaopresente VALUES(?,?,?,?,?,?,?,?)", result_jovens_nao)
+    cursor.executemany("INSERT INTO app_jovensnaopresente VALUES(%s, %s, %s, %s, %s,%s, %s, %s)", result_jovens_nao)
 
     reuniao = request.POST.get("reuniao", None)
     id_reuniao = 2
