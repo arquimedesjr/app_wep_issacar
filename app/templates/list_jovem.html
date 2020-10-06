@@ -13,6 +13,12 @@ Lista de Jovens
 
 
 <div class="offset-1 col-10 list-div">
+     {% for message in messages %}
+    <div class="alert alert-warning">
+        <a class="close" href="#" data-dismiss="alert">×</a>
+        {{ message }}
+    </div>
+    {% endfor %}
     <h3 class="text-center">Lista de Jovens</h3>
     <div class="d-flex justify-content-center">
         <form method="GET" action="">

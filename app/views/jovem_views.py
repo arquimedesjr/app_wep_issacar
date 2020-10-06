@@ -1,5 +1,6 @@
 from urllib.request import urlopen
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites import requests
 from django.core.paginator import Paginator
@@ -31,7 +32,9 @@ def lista_jovens_presenca(request, tamplate_name="list_jovem.html"):
         jovens = {'lista': jovens_presente, "filtro": campoFiltro}
 
     if request.method == "POST":
-        enviar_relatorio(request)
+        if enviar_relatorio(request) is None:
+            messages.warning(request, 'Não foi informado presença em nenhum jovem')
+            return redirect("lista_jovens")
         return redirect('index')
 
     return render(request, tamplate_name, jovens)
@@ -66,12 +69,10 @@ def enviar_relatorio(request):
         cursor.execute("DELETE FROM app_jovensnaopresente")
         cursor.fetchall()
 
-    cursor.execute("SELECT *  from app_jovens WHERE presenca = 'NÃO'")
-    result_jovens_nao = cursor.fetchall()
+        cursor.execute("SELECT *  from app_jovens WHERE presenca = 'NÃO'")
+        result_jovens_nao = cursor.fetchall()
 
-    print(result_jovens_nao)
-
-    cursor.executemany("INSERT INTO app_jovensnaopresente VALUES(%s, %s, %s, %s, %s,%s, %s, %s)", result_jovens_nao)
+        cursor.executemany("INSERT INTO app_jovensnaopresente VALUES(%s, %s, %s, %s, %s,%s, %s, %s)", result_jovens_nao)
 
     reuniao = request.POST.get("reuniao", None)
     id_reuniao = 2
@@ -82,15 +83,18 @@ def enviar_relatorio(request):
     if result[0] > 0:
         x = datetime.datetime.now()
 
-    cursor.execute(
-        "INSERT INTO app_relatorio "
-        "(grupo_id, tribo_id, data, reuniao_id, qnt) "
-        "VALUES (%s, %s, %s, %s, %s)",
-        [1, 1, x.strftime("%Y") + '-' + x.strftime("%m") + '-' + x.strftime("%d"), id_reuniao, result[0]])
+    if not result:
+        cursor.execute(
+            "INSERT INTO app_relatorio "
+            "(grupo_id, tribo_id, data, reuniao_id, qnt) "
+            "VALUES (%s, %s, %s, %s, %s)",
+            [1, 1, x.strftime("%Y") + '-' + x.strftime("%m") + '-' + x.strftime("%d"), id_reuniao, result[0]])
 
-    cursor.execute(
-        "UPDATE app_jovens "
-        " SET presenca = 'NÃO' WHERE presenca = 'SIM'")
+        cursor.execute(
+            "UPDATE app_jovens "
+            " SET presenca = 'NÃO' WHERE presenca = 'SIM'")
+    else:
+        return None
 
 
 @login_required
