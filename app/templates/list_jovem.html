@@ -11,8 +11,8 @@ Lista de Jovens
 
 {% block content %}
 
-<div class="container">
 
+<div class="offset-1 col-10 list-div">
     <h3 class="text-center">Lista de Jovens</h3>
     <div class="d-flex justify-content-center">
         <form method="GET" action="">
@@ -27,12 +27,12 @@ Lista de Jovens
             </div>
         </form>
     </div>
+
     <div class="row ">
 
 
-        {% for jovens in lista %}
-        <div class="col-6 col-sm-3 text-center mt-3">
-
+        {% for jovens in paginacao %}
+        <div class="col-6 col-sm-3 text-center mt-4">
             <img class="rounded-circle article-img" src="{{jovens.foto.url}}" width="140" height="130" alt="">
 
 
@@ -59,10 +59,28 @@ Lista de Jovens
                     {% endif %}
                 </a>
             </p>
+
         </div>
         {% endfor %}
+
+
     </div>
 
+    <div class="pagination">
+            <span class="step-links">
+                {% if paginacao.has_previous %}
+                    <a href="?page={{ paginacao.previous_page_number }}">Anterior</a>
+                {% endif %}
+
+                <span class="current">
+                    {{ paginacao.number }} de {{ paginacao.paginator.num_pages }}
+                </span>
+
+                {% if paginacao.has_next %}
+                    <a href="?page={{ paginacao.next_page_number }}">Próxima</a>
+                {% endif %}
+            </span>
+    </div>
 </div>
 
 {% endblock %}

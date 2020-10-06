@@ -10197,6 +10197,12 @@ a.text-dark:hover, a.text-dark:focus {
   visibility: hidden !important;
 }
 
+.step-links {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @media print {
   *,
   *::before,
@@ -10274,6 +10280,7 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+
 
 
 }

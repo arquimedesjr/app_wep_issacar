@@ -2,6 +2,7 @@ from urllib.request import urlopen
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites import requests
+from django.core.paginator import Paginator
 from django.db import connection
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -18,9 +19,16 @@ def lista_jovens_presenca(request, tamplate_name="list_jovem.html"):
     if query:
         jovens_presente = Jovens.objects.filter(nome__contains=query)
     else:
-        jovens_presente = Jovens.objects.order_by('id')
+        jovens_presente = Jovens.objects.all().order_by('nome')
 
-    jovens = {'lista': jovens_presente, "filtro": campoFiltro}
+    paginator = Paginator(jovens_presente, 8)
+    page = request.GET.get('page')
+    paginacao = paginator.get_page(page)
+
+    if paginacao is not None:
+        jovens = {"filtro": campoFiltro, "paginacao": paginacao}
+    else:
+        jovens = {'lista': jovens_presente, "filtro": campoFiltro}
 
     if request.method == "POST":
         enviar_relatorio(request)
