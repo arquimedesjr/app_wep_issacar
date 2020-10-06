@@ -69,7 +69,6 @@ def enviar_relatorio(request):
 
         if len(jovensnaopresente) is not 0:
             cursor.execute("DELETE FROM app_jovensnaopresente")
-            jovensnaopresente = cursor.fetchall()
 
         reuniao = request.POST.get("reuniao", None)
         id_reuniao = 2
